@@ -5,6 +5,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { Pool } = require('pg');
 
+const leadsRoutes = require('./routes/leads.routes');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -15,6 +17,8 @@ const pool = new Pool({
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+
+app.use('/api/leads', leadsRoutes);
 
 app.get('/health', async (req, res) => {
   try {
